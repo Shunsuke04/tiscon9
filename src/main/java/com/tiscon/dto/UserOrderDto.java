@@ -15,6 +15,7 @@ public class UserOrderDto {
     private String newPrefectureId;
 
     private String newAddress;
+
     private String dateId;
 
     private String box;
@@ -82,11 +83,12 @@ public class UserOrderDto {
     public void setNewAddress(String newAddress) {
         this.newAddress = newAddress;
     }
-    public String getdateId() {
+
+    public String getDateId() {
         return dateId;
     }
 
-    public void setdateId(String dateId) {
+    public void setDateId(String dateId) {
         this.dateId = dateId;
     }
 

@@ -1,7 +1,6 @@
 package com.tiscon.form;
 
 import com.tiscon.validator.Numeric;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -35,6 +34,7 @@ public class UserOrderForm {
 
     @NotBlank
     private String newAddress;
+
     @NotBlank
     private String dateId;
 
@@ -112,13 +112,15 @@ public class UserOrderForm {
     public void setNewAddress(String newAddress) {
         this.newAddress = newAddress;
     }
-    public String getdateId() {
+    
+    public String getDateId() {
         return dateId;
     }
 
-    public void setdateId(String dateId) {
+    public void setDateId(String dateId) {
         this.dateId = dateId;
     }
+    
 
     public String getBox() {
         return box;

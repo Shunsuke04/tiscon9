@@ -88,6 +88,12 @@ public class EstimateService {
         // オプションサービスの料金を算出する。
         int priceForOptionalService = 0;
 
+        int dateInt = Integer.parseInt(dto.getDateId());
+
+        // この後で dateInt を使う処理が続く場合
+        System.out.println("Date is: " + dateInt);
+
+
         if (dto.getWashingMachineInstallation()) {
             priceForOptionalService = estimateDAO.getPricePerOptionalService(OptionalServiceType.WASHING_MACHINE.getCode());
         }
