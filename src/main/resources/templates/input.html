@@ -91,7 +91,24 @@
         <div class="form-group">
           
           <label for="dateId">引越し日を選択</label>
-          <input type="date" name="calendar" max="9999-12-31">
+          <input id="date" type="date">
+          <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+          <script>
+          $(function(){
+            //今日をYYYY-MM-DD形式で返す関数
+            function formatDate() {
+              let dt = new Date();
+              var y = dt.getFullYear();
+              var m = ('00' + (dt.getMonth()+1)).slice(-2);
+              var d = ('00' + dt.getDate()).slice(-2);
+              return (y + '-' + m + '-' + d);
+            }
+            //min属性に今日の日付をセット
+            $("#date").attr("min", formatDate());
+            
+          });
+          </script>
+
           
         </div>
       </fieldset>
