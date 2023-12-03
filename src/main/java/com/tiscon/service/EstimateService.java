@@ -10,6 +10,8 @@ import com.tiscon.dto.UserOrderDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,19 +88,38 @@ public class EstimateService {
         int pricePerTruck = estimateDAO.getPricePerTruck(boxes);
 
         // オプションサービスの料金を算出する。
-        int priceForOptionalService = 0;
+        double priceForOptionalService = 0;
 
-        int dateInt = Integer.parseInt(dto.getDateId());
+        double N = 0;
+        String date = dto.getDateId();
+        Pattern pattern = Pattern.compile("\\d{4}-(\\d{2})-\\d{2}");
+        Matcher matcher = pattern.matcher(date);
 
-        // この後で dateInt を使う処理が続く場合
-        System.out.println("Date is: " + dateInt);
+        if (matcher.matches()) {
+            String monthStr = matcher.group(1);
+
+            int month = Integer.parseInt(monthStr);
+
+        if (month == 3 || month == 4) {
+            N = 1.5; 
+        } 
+    else if (month == 9){
+        N = 1.2;
+    }
+    else {
+        N = 1;
+    }
+} else {
+    System.out.println("Date format does not match.");
+}
 
 
         if (dto.getWashingMachineInstallation()) {
             priceForOptionalService = estimateDAO.getPricePerOptionalService(OptionalServiceType.WASHING_MACHINE.getCode());
         }
+        double price = (priceForDistance + pricePerTruck) * N + priceForOptionalService;
 
-        return priceForDistance + pricePerTruck + priceForOptionalService;
+        return (int) Math.floor(price);
     }
 
     /**
